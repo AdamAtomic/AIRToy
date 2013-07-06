@@ -4,6 +4,10 @@ WARNING: AIRToy is currently only compatible with MAC OS X.
 
 
 
+VIDEO WALKTHROUGH ONLINE - http://www.youtube.com/watch?v=eIhYlM9TQww
+
+
+
 DESCRIPTION
 
 AIRToy is a very lightweight "project generator" command-line script
