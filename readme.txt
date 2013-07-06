@@ -41,7 +41,7 @@ INSTALLATION and CONFIGURATION
 
 AIRToy is very easy to set up and install. First, download and install the
 Adobe AIR SDK ( http://www.adobe.com/devnet/air/air-sdk-download.html ) wherever
-you want. (NOTE: AIRToy also works fine with the Flex SDK)
+you want. (NOTE: AIRToy also works fine with the Flex 4.6 SDK)
 
 Then download and install the latest AIRToy release wherever you want.
 I like to keep it in my ActionScript project folder, with the rest
@@ -65,20 +65,20 @@ While the AIR SDK is in many regards the best, most modern ActionScript SDK
 from Adobe, it's actually notably lacking some crucial utilities for
 command-line development. Primarily, the mxmlc compiler is *crazy slow* by
 default. A lot of developers prefer to use fcsh, the "flash compiler shell"
-utility, instead. Unfortunately this tool ONLY comes with the Flex SDK (v3.1),
-not the AIR SDK (v3.7), for reasons I do not understand. It is also an
-interactive shell, so to use it effectively from the command-line you need
-a third party utility like fcshctl:
+utility, instead. Unfortunately this tool ONLY comes with the Flex 4.6 SDK
+(AIR v3.1), not the AIR SDK (v3.7), for reasons I do not understand. Fcsh is
+also an interactive shell, so to use it effectively from the command-line you
+need a third party utility like fcshctl:
 
 http://hasseg.org/blog/post/194/fcshctl-the-flex-compiler-shell-controller/
 
-...in order to get the most out of it. AIRToy is totally fine with that! First,
-download the latest version of the Flex SDK from Adobe. Then, copy the fcshctl
-shell script from that website into your Flex SDK's /bin folder. Finally,
-in your custom.cfg file, set the SDK parameter to your Flex SDK install path,
-set AIR_VERSION="3.1", and set COMPILER="bin/fcshctl mxmlc". This speeds up
-compile times immensely, especially on projects with external source paths
-and libraries.
+...in order to actually be able to use it. AIRToy is totally fine with that!
+First, download the latest version of the Flex SDK from Adobe. Then, copy the
+fcshctl shell script from that website into your Flex SDK's /bin folder.
+Finally, in your custom.cfg file, set the SDK parameter to your Flex SDK
+install path, set AIR_VERSION="3.1", and set COMPILER="bin/fcshctl mxmlc".
+This speeds up compile times immensely, especially on projects with external
+source paths and libraries.
 
 
 
