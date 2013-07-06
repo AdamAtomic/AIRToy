@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# a meta-script that generates custom XML and build scripts
+# for command-line ActionScript development with Adobe AIR SDK.
+
+SCRIPT_PATH=$(dirname $0)
+source $SCRIPT_PATH/config.sh
+if [[ -r $SCRIPT_PATH/custom.sh ]]; then
+	source $SCRIPT_PATH/custom.sh
+else
+	echo "\nERROR: custom.sh not found. See config.sh for details.\n"
+fi
+
+#first argument = new project name
+if [[ -z "$1" ]]; then
+	echo "\nERROR: Please pick a name for this project.\n"
+	exit 1
+fi
+
+NAME=$1
+FULLNAME="$WORKSPACE/$NAME"
+
+#if this project already exists then quit right away
+if [[ -d "$FULLNAME" ]]; then
+	echo "\nERROR: $FULLNAME already exists. Please pick a new name.\n"
+	exit 1
+fi
+
+#verify that if there is a second parameter it has a valid value/setting
+if [[ -z "$2" ]]; then
+	TYPE="Template"
+elif [[ "$2" = "-tweenlite" ]]; then
+	TYPE="TweenLite"
+elif [[ "$2" = "-flixel" ]]; then
+	TYPE="Flixel"
+else
+	echo "\nERROR: invalid project type.\n"
+	exit 1
+fi
+
+echo "\nattempting to generate a $TYPE project called $NAME..."
+
+#create the default directory structure
+mkdir $FULLNAME
+SRC_DIR="$FULLNAME/$SRC"
+mkdir $SRC_DIR
+mkdir $SRC_DIR/$DATA
+
+echo "\ngenerating build scripts and XML files..."
+
+#generate relevant project source files and library/source-path references
+SOURCE_PATH="$SRC_DIR"
+LIBRARY_PATH="$SRC_DIR"
+source $SCRIPT_PATH/$TYPE/inflate_module.sh
+
+#generate a custom app descriptor XML file
+sed -e "s;%NAME%;$NAME;" -e "s;%DEVELOPER_ID%;$DEVELOPER_ID;" \
+	$SCRIPT_PATH/Template/Descriptor.xml > $SRC_DIR/$NAME$DESCRIPTOR_SUFFIX.xml
+
+#generate a custom build script for this project (this is a bit nasty)
+sed -e "s;%NAME%;$NAME;" -e "s;%WORKSPACE%;$WORKSPACE;" -e "s;%SDK%;$SDK;" \
+	-e "s;%FRAMEWORKS%;$FRAMEWORKS;" -e "s;%SRC%;$SRC;" -e "s;%DEPLOY_DEBUG%;$DEPLOY_DEBUG;" \
+	-e "s;%DESCRIPTOR_SUFFIX%;$DESCRIPTOR_SUFFIX;" -e "s;%COMPILER%;$COMPILER;" \
+	-e "s;%CONFIG%;$CONFIG;" -e "s;%ADL%;$ADL;" -e "s;%LOCALE%;$LOCALE;" \
+	-e "s;%SOURCE_PATH%;$SOURCE_PATH;" -e "s;%LIBRARY_PATH%;$LIBRARY_PATH;" \
+	$SCRIPT_PATH/Template/debug.sh > $FULLNAME/debug.sh
+
+echo "\nSUCCESS: Created new $TYPE project '$NAME'.\n\nLaunching now...\n"
+
+sh $FULLNAME/debug.sh
+
+exit

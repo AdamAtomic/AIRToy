@@ -1,0 +1,40 @@
+#!/bin/sh
+
+#important paths and filenames, auto-populated by inflate.sh
+NAME="%NAME%"
+WORKSPACE="%WORKSPACE%"
+SDK="%SDK%"
+FRAMEWORKS="$SDK/%FRAMEWORKS%"
+CONFIG="$FRAMEWORKS/%CONFIG%"
+SRC="$WORKSPACE/$NAME/%SRC%"
+DEPLOY_DEBUG="$WORKSPACE/$NAME/%DEPLOY_DEBUG%"
+DESCRIPTOR_SUFFIX="%DESCRIPTOR_SUFFIX%"
+COMPILER="$SDK/%COMPILER%"
+ADL="$SDK/%ADL%"
+LOCALE="%LOCALE%"
+SOURCE_PATH="%SOURCE_PATH%"
+LIBRARY_PATH="%LIBRARY_PATH%"
+
+#some helper filenames/paths
+DESCRIPTOR="$NAME$DESCRIPTOR_SUFFIX.xml"
+
+#clean the deploy directory
+echo "\nResetting $DEPLOY_DEBUG..."
+rm -rf $DEPLOY_DEBUG
+mkdir $DEPLOY_DEBUG
+
+#compile a new SWF and duplicate the app descriptor XML
+echo "\nCompiling $NAME.swf using $COMPILER...\n"
+$COMPILER	-load-config $CONFIG \
+			-source-path $FRAMEWORKS \
+			-source-path $SOURCE_PATH \
+			-include-libraries+=$FRAMEWORKS/libs \
+			-library-path+=$FRAMEWORKS/locale/$LOCALE \
+			-library-path+=$LIBRARY_PATH \
+			incremental=true $SRC/$NAME.as -o $DEPLOY_DEBUG/$NAME.swf 
+cp $SRC/$DESCRIPTOR $DEPLOY_DEBUG/$DESCRIPTOR
+
+#then run the resulting file in ADL
+echo "\nLaunching $NAME.swf via $ADL...\n\nDEBUG CONSOLE\n\
+=================================================="
+$ADL $DEPLOY_DEBUG/$DESCRIPTOR

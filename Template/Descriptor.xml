@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/3.7" minimumPatchLevel="0">
+    <id>%DEVELOPER_ID%.%NAME%</id>
+    <name>
+        <text xml:lang="en">%NAME%</text>
+    </name>
+    <versionNumber>0.0.1</versionNumber>
+    <filename>%NAME%</filename>
+    <description>
+        <text xml:lang="en">Placeholder description for %NAME%.</text>
+    </description>
+    <initialWindow>
+        <content>%NAME%.swf</content>
+        <title>%NAME%</title>
+        <renderMode>direct</renderMode>
+        <fullscreen>true</fullscreen>
+        <visible>true</visible>
+    </initialWindow>
+</application>
