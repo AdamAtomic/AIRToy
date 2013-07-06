@@ -31,7 +31,7 @@ $COMPILER	-load-config $CONFIG \
 			-include-libraries+=$FRAMEWORKS/libs \
 			-library-path+=$FRAMEWORKS/locale/$LOCALE \
 			-library-path+=$LIBRARY_PATH \
-			incremental=true $SRC/$NAME.as -o $DEPLOY_DEBUG/$NAME.swf 
+			$SRC/$NAME.as -o $DEPLOY_DEBUG/$NAME.swf 
 cp $SRC/$DESCRIPTOR $DEPLOY_DEBUG/$DESCRIPTOR
 
 #then run the resulting file in ADL
