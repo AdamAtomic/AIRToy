@@ -47,9 +47,10 @@ Then download and install the latest AIRToy release wherever you want.
 I like to keep it in my ActionScript project folder, with the rest
 of my games and stuff, but it should work from anywhere.
 
-Finally, in the AIRToy folder, duplicate "config.cfg" and call the new file "custom.cfg".
-Edit "custom.cfg" and update the various critical file paths (like filling in the AIR SDK
-install path, the path of your ActionScript project folder, default app width/height, etc).
+Finally, in the AIRToy folder, duplicate "config.cfg" and call the new file
+"custom.cfg". Edit "custom.cfg" and update the various critical file paths
+(like filling in the AIR SDK install path, the path of your ActionScript
+project folder, default app width/height, etc).
 
 That's it! You should be able to create a command-line ActionScript project now,
 using AIRToy's "inflate" script from the OS X Terminal, like so:
@@ -60,12 +61,13 @@ using AIRToy's "inflate" script from the OS X Terminal, like so:
 
 MXMLC IS TOO SLOW, HELP, WHY IS EVERYTHING AWFUL
 
-While the AIR SDK is in many regards the best, most modern ActionScript SDK from Adobe,
-it's actually notably lacking some crucial utilities for command-line development.
-Primarily, the mxmlc compiler is *crazy slow* by default. A lot of developers prefer
-to use fcsh, the "flash compiler shell" utility, instead. Unfortunately this tool ONLY
-comes with the Flex SDK (v3.1), not the AIR SDK (v3.7), for reasons I do not understand.
-It is also an interactive shell, so to use it effectively from the command-line you need
+While the AIR SDK is in many regards the best, most modern ActionScript SDK
+from Adobe, it's actually notably lacking some crucial utilities for
+command-line development. Primarily, the mxmlc compiler is *crazy slow* by
+default. A lot of developers prefer to use fcsh, the "flash compiler shell"
+utility, instead. Unfortunately this tool ONLY comes with the Flex SDK (v3.1),
+not the AIR SDK (v3.7), for reasons I do not understand. It is also an
+interactive shell, so to use it effectively from the command-line you need
 a third party utility like fcshctl:
 
 http://hasseg.org/blog/post/194/fcshctl-the-flex-compiler-shell-controller/
@@ -74,8 +76,9 @@ http://hasseg.org/blog/post/194/fcshctl-the-flex-compiler-shell-controller/
 download the latest version of the Flex SDK from Adobe. Then, copy the fcshctl
 shell script from that website into your Flex SDK's /bin folder. Finally,
 in your custom.cfg file, set the SDK parameter to your Flex SDK install path,
-set AIR_VERSION="3.1", and set COMPILER="bin/fcshctl mxmlc". This speeds up compile
-times immensely, especially on projects with external source paths and libraries.
+set AIR_VERSION="3.1", and set COMPILER="bin/fcshctl mxmlc". This speeds up
+compile times immensely, especially on projects with external source paths
+and libraries.
 
 
 
