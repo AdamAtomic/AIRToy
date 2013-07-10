@@ -33,7 +33,7 @@ Currently AIRToy only supports two templates out of the box:
 -flixel
 
 AIRToy is NOT meant to be a full IDE replacement, just a way to streamline
-rapid prototyping in ActionScript 3 and AIR.
+rapid prototyping and command-line development in ActionScript 3 and AIR.
 
 
 
@@ -57,28 +57,39 @@ using AIRToy's "inflate" script from the OS X Terminal, like so:
 
 > AIRToy/inflate MyNewGame
 
+After creating your new app, you can recompile it and launch it in the debugger
+again with a simple call like:
+
+> MyNewGame/debug
+
+or just "debug" if you're already in your game's directory. You can also just
+double-click the "debug" program in Finder.
+
+
+
+A NOTE ABOUT DEBUGGING AND TRACE STATEMENTS
+
+In some versions of Flex or AIR, debugging is actually disabled in
+the $SDK/frameworks/air-config.xml or flex-config.xml file. If you
+want access to trace statements in the Terminal, you may need to
+enable that setting there.
+
 
 
 MXMLC IS TOO SLOW, HELP, WHY IS EVERYTHING AWFUL
 
-While the AIR SDK is in many regards the best, most modern ActionScript SDK
-from Adobe, it's actually notably lacking some crucial utilities for
-command-line development. Primarily, the mxmlc compiler is *crazy slow* by
-default. A lot of developers prefer to use fcsh, the "flash compiler shell"
-utility, instead. Unfortunately this tool ONLY comes with the Flex 4.6 SDK
-(AIR v3.1), not the AIR SDK (v3.7), for reasons I do not understand. Fcsh is
-also an interactive shell, so to use it effectively from the command-line you
-need a third party utility like fcshctl:
+There is a bit of a catch-22 in ActionScript 3 development right now.
+If you want the latest compiler AND the latest AIR SDK support, you
+frequently have to install a few different overlapping SDKs if you
+want access to a new version of ADL and a new version of MXMLC/FCSH.
+AIRToy is totally ok with that, and even plays nice with third party
+utilities like fcshctl:
 
 http://hasseg.org/blog/post/194/fcshctl-the-flex-compiler-shell-controller/
 
-...in order to actually be able to use it. AIRToy is totally fine with that!
-First, download the latest version of the Flex SDK from Adobe. Then, copy the
-fcshctl shell script from that website into your Flex SDK's /bin folder.
-Finally, in your custom.cfg file, set the SDK parameter to your Flex SDK
-install path, set AIR_VERSION="3.1", and set COMPILER="bin/fcshctl mxmlc".
-This speeds up compile times immensely, especially on projects with external
-source paths and libraries.
+Drop AIRToy into your frankenstein SDK's /bin/ folder and update the
+COMPILER= part of custom.cfg to say COMPILER="bin/fcshctl mxmlc".
+Voila! Super fast modern AIR compilation.
 
 
 
