@@ -4,6 +4,7 @@
 NAME="%NAME%"
 WORKSPACE="%WORKSPACE%"
 SDK="%SDK%"
+FLEX_HOME=$SDK
 FRAMEWORKS="$SDK/%FRAMEWORKS%"
 CONFIG="$FRAMEWORKS/%CONFIG%"
 SRC="$WORKSPACE/$NAME/%SRC%"
@@ -17,6 +18,7 @@ LIBRARY_PATH="%LIBRARY_PATH%"
 
 #some helper filenames/paths
 DESCRIPTOR="$NAME$DESCRIPTOR_SUFFIX.xml"
+export FLEX_HOME="$SDK"
 
 #clean the deploy directory
 echo "\nResetting $DEPLOY_DEBUG..."
