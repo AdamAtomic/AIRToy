@@ -41,7 +41,7 @@ fi
 echo "\nattempting to generate a $TYPE project called $NAME..."
 
 #create the default directory structure
-mkdir $FULLNAME
+mkdir -p $FULLNAME
 SRC_DIR="$FULLNAME/$SRC"
 mkdir $SRC_DIR
 mkdir $SRC_DIR/$DATA
