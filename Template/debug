@@ -35,7 +35,9 @@ $COMPILER	-load-config $CONFIG \
 			$SRC/$NAME.as -o $DEPLOY_DEBUG/$NAME.swf 
 cp $SRC/$DESCRIPTOR $DEPLOY_DEBUG/$DESCRIPTOR
 
-#then run the resulting file in ADL
-echo "\nLaunching $NAME.swf via $ADL...\n\nDEBUG CONSOLE\n\
+
+#then run the resulting file in Flash Player Debugger
+echo "\nLaunching $NAME.swf via Flash Player Debugger...\n\nDEBUG CONSOLE\n\
 =================================================="
-$ADL $DEPLOY_DEBUG/$DESCRIPTOR
+open -a /Applications/Flash\ Player.app $DEPLOY_DEBUG/$NAME.swf
+
